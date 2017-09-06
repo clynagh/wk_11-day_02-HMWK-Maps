@@ -23,20 +23,21 @@ var MapWrapper = function(container, coords, zoom){
 // }); 
 // }
 
-MapWrapper.prototype.addMarker = function(coords, title, contentString) {
-  var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
+MapWrapper.prototype.addMarker = function(coords) {
+  // var infowindow = new google.maps.InfoWindow({
+  //     content: contentString
+  //   });
     var marker = new google.maps.Marker({
       position: coords,
       map: this.googleMap,
-      title: title
+      // title: title
     });
     this.markers.push(marker);
+    return marker;
 
-   marker.addListener('click', function() {
-      infowindow.open(this.googleMap, marker);
-    });
+   // marker.addListener('click', function() {
+   //    infowindow.open(this.googleMap, marker);
+   //  });
   },
 
 MapWrapper.prototype.addClickEvent = function(){
@@ -59,9 +60,14 @@ MapWrapper.prototype.bounceMarker = function(){
   })
 }
 
-MapWrapper.prototype.addInfoWindow = function(coords, text){
-var marker = this.addMarker(coords);
-
+MapWrapper.prototype.addInfoWindow = function(coords, text) {
+  var marker = this.addMarker(coords);
+  marker.addListener('click', function(){
+    var infoWindow = new google.maps.InfoWindow({
+        content: text
+  })
+  infoWindow.open(this.map, marker);
+})
 }
 
 // var infowindow = new google.maps.InfoWindow({

@@ -25,7 +25,7 @@ var initialize = function(){
   // marker.addListener('click', function() {
   //   infowindow.open(mainMap.googleMap, marker);
   // });
-
+  mainMap.addInfoWindow(center, "This is the information we want to see")
 }
 
 
